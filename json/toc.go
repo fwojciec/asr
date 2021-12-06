@@ -1,4 +1,4 @@
-package toc
+package json
 
 import (
 	"context"
@@ -17,17 +17,17 @@ type getsTOC struct {
 
 type tocContents struct {
 	Contents []struct {
-		Title    string `json:"title,omitempty"`
-		Href     string `json:"href,omitempty"`
+		Title    string `json:"title"`
+		Href     string `json:"href"`
 		Contents []struct {
-			Title    string `json:"title,omitempty"`
-			Href     string `json:"href,omitempty"`
+			Title    string `json:"title"`
+			Href     string `json:"href"`
 			Contents []struct {
-				Title string `json:"title,omitempty"`
-				Href  string `json:"href,omitempty"`
-			} `json:"contents,omitempty"`
-		} `json:"contents,omitempty"`
-	} `json:"contents,omitempty"`
+				Title string `json:"title"`
+				Href  string `json:"href"`
+			} `json:"contents"`
+		} `json:"contents"`
+	} `json:"contents"`
 }
 
 func (s *getsTOC) GetTOC(ctx context.Context, url string) ([]*asr.TOCEntry, error) {
@@ -43,7 +43,7 @@ func (s *getsTOC) GetTOC(ctx context.Context, url string) ([]*asr.TOCEntry, erro
 	entries := c.Contents[0].Contents[0].Contents
 	res := make([]*asr.TOCEntry, len(entries))
 	for i, e := range entries {
-		u, err := joinURL(s.baseURL, e.Href)
+		u, err := s.completeURL(e.Href)
 		if err != nil {
 			return nil, err
 		}
@@ -57,8 +57,8 @@ func (s *getsTOC) GetTOC(ctx context.Context, url string) ([]*asr.TOCEntry, erro
 	return res, nil
 }
 
-func joinURL(prefix, suffix string) (string, error) {
-	u, err := neturl.Parse(prefix)
+func (s *getsTOC) completeURL(suffix string) (string, error) {
+	u, err := neturl.Parse(s.baseURL)
 	if err != nil {
 		return "", err
 	}
