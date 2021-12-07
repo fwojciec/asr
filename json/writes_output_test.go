@@ -27,9 +27,9 @@ func TestWritesOutputNonEmptyData(t *testing.T) {
 	subject := json.NewWritesOutput()
 
 	buf := &bytes.Buffer{}
-	data := []*asr.Service{{}}
+	data := []*asr.Service{{Name: "test_name"}}
 	err := subject.Write(data, buf)
 	ok(t, err)
 
-	equals(t, buf.String(), "[{\"name\":\"\",\"prefix\":\"\",\"config_doc_url\":\"\",\"api_doc_url\":\"\",\"iam_doc_url\":\"\",\"actions\":null,\"resource_types\":null,\"condition_keys\":null}]\n")
+	equals(t, buf.String(), "[{\"name\":\"test_name\"}]\n")
 }

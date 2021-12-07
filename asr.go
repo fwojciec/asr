@@ -12,43 +12,43 @@ type TOCEntry struct {
 }
 
 type ActionResourceType struct {
-	Name     string `json:"name"`
-	Required bool   `json:"required"`
+	Name     string `json:"name,omitempty"`
+	Required bool   `json:"required,omitempty"`
 }
 
 type Action struct {
-	Name             string               `json:"name"`
-	DocURL           string               `json:"doc_url"`
-	Description      string               `json:"description"`
-	AccessLevel      string               `json:"access_level"`
-	ResourceTypes    []ActionResourceType `json:"resource_types"`
-	ConditionKeys    []string             `json:"condition_keys"`
-	DependentActions []string             `json:"dependent_actions"`
+	Name             string               `json:"name,omitempty"`
+	DocURL           string               `json:"doc_url,omitempty"`
+	Description      string               `json:"description,omitempty"`
+	AccessLevel      string               `json:"access_level,omitempty"`
+	ResourceTypes    []ActionResourceType `json:"resource_types,omitempty"`
+	ConditionKeys    []string             `json:"condition_keys,omitempty"`
+	DependentActions []string             `json:"dependent_actions,omitempty"`
 }
 
 type ResourceType struct {
-	Name          string   `json:"name"`
-	DocURL        string   `json:"doc_url"`
-	ARNPattern    string   `json:"arn_pattern"`
-	ConditionKeys []string `json:"condition_keys"`
+	Name          string   `json:"name,omitempty"`
+	DocURL        string   `json:"doc_url,omitempty"`
+	ARNPattern    string   `json:"arn_pattern,omitempty"`
+	ConditionKeys []string `json:"condition_keys,omitempty"`
 }
 
 type ConditionKey struct {
-	Name        string `json:"name"`
-	DocURL      string `json:"doc_url"`
-	Description string `json:"description"`
-	Type        string `json:"type"`
+	Name        string `json:"name,omitempty"`
+	DocURL      string `json:"doc_url,omitempty"`
+	Description string `json:"description,omitempty"`
+	Type        string `json:"type,omitempty"`
 }
 
 type Service struct {
-	Name          string         `json:"name"`
-	Prefix        string         `json:"prefix"`
-	ConfigDocURL  string         `json:"config_doc_url"`
-	APIDocURL     string         `json:"api_doc_url"`
-	IAMDocURL     string         `json:"iam_doc_url"`
-	Actions       []Action       `json:"actions"`
-	ResourceTypes []ResourceType `json:"resource_types"`
-	ConditionKeys []ConditionKey `json:"condition_keys"`
+	Name          string         `json:"name,omitempty"`
+	Prefix        string         `json:"prefix,omitempty"`
+	ConfigDocURL  string         `json:"config_doc_url,omitempty"`
+	APIDocURL     string         `json:"api_doc_url,omitempty"`
+	IAMDocURL     string         `json:"iam_doc_url,omitempty"`
+	Actions       []Action       `json:"actions,omitempty"`
+	ResourceTypes []ResourceType `json:"resource_types,omitempty"`
+	ConditionKeys []ConditionKey `json:"condition_keys,omitempty"`
 }
 
 type GetsTOC interface {
