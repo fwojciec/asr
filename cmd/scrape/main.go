@@ -7,21 +7,23 @@ import (
 	"os"
 
 	"github.com/fwojciec/asr"
+	"github.com/fwojciec/asr/goquery"
 	"github.com/fwojciec/asr/http"
 	"github.com/fwojciec/asr/json"
 )
 
 const (
 	baseURL = "https://docs.aws.amazon.com/service-authorization/latest/reference"
-	tocURL  = "https://docs.aws.amazon.com/service-authorization/latest/reference/reference.html"
+	tocURL  = "https://docs.aws.amazon.com/service-authorization/latest/reference/toc-contents.json"
 )
 
 func main() {
 	ctx := context.Background()
 	getter := http.NewGetter()
 	scraper := &Scraper{
-		GetsTOC:      json.NewGetsTOC(getter, baseURL),
-		WritesOutput: json.NewWritesOutput(),
+		GetsTOC:        json.NewGetsTOC(getter, baseURL),
+		ScrapesAWSDocs: goquery.NewScrapesAWSDocs(getter),
+		WritesOutput:   json.NewWritesOutput(),
 	}
 	outFile, err := os.Create("out.json")
 	if err != nil {
