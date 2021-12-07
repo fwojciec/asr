@@ -9,7 +9,6 @@ import (
 	"github.com/fwojciec/asr"
 	"github.com/fwojciec/asr/http"
 	"github.com/fwojciec/asr/json"
-	"github.com/fwojciec/asr/toc"
 )
 
 const (
@@ -21,7 +20,7 @@ func main() {
 	ctx := context.Background()
 	getter := http.NewGetter()
 	scraper := &Scraper{
-		GetsTOC:      toc.NewGetsTOC(getter, baseURL),
+		GetsTOC:      json.NewGetsTOC(getter, baseURL),
 		WritesOutput: json.NewWritesOutput(),
 	}
 	outFile, err := os.Create("out.json")

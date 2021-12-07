@@ -23,7 +23,7 @@ type Action struct {
 	AccessLevel      string               `json:"access_level"`
 	ResourceTypes    []ActionResourceType `json:"resource_types"`
 	ConditionKeys    []string             `json:"condition_keys"`
-	DependentActions string               `json:"dependent_actions"`
+	DependentActions []string             `json:"dependent_actions"`
 }
 
 type ResourceType struct {
