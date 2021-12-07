@@ -60,7 +60,7 @@ func TestScrapesPreamblePrefix(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].Prefix)
@@ -83,7 +83,7 @@ func TestScrapesPreambleConfigDocURL(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].ConfigDocURL)
@@ -106,7 +106,7 @@ func TestScrapesPreambleAPIDocURL(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].APIDocURL)
@@ -129,7 +129,7 @@ func TestScrapesPreambleIAMDocURL(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].IAMDocURL)
@@ -189,7 +189,7 @@ func TestScrapesResourceTypes(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].ResourceTypes)
@@ -228,7 +228,7 @@ func TestScrapesConditionKeys(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].ConditionKeys)
@@ -403,7 +403,7 @@ func TestScrapesActions(t *testing.T) {
 		tc := tc
 		t.Run(tc.path, func(t *testing.T) {
 			t.Parallel()
-			subject := goquery.NewScrapesAWSDocs(&mockGetter{})
+			subject := goquery.NewScrapesAWSDocs(&mockGetter{}, 10)
 			res, err := subject.Scrape(context.Background(), []*asr.TOCEntry{{URL: tc.path}})
 			ok(t, err)
 			equals(t, tc.exp, res[0].Actions)

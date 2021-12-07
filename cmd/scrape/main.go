@@ -13,8 +13,9 @@ import (
 )
 
 const (
-	baseURL = "https://docs.aws.amazon.com/service-authorization/latest/reference"
-	tocURL  = "https://docs.aws.amazon.com/service-authorization/latest/reference/toc-contents.json"
+	baseURL          = "https://docs.aws.amazon.com/service-authorization/latest/reference"
+	tocURL           = "https://docs.aws.amazon.com/service-authorization/latest/reference/toc-contents.json"
+	maxWorkers int64 = 50
 )
 
 func main() {
@@ -22,7 +23,7 @@ func main() {
 	getter := http.NewGetter()
 	scraper := &Scraper{
 		GetsTOC:        json.NewGetsTOC(getter, baseURL),
-		ScrapesAWSDocs: goquery.NewScrapesAWSDocs(getter),
+		ScrapesAWSDocs: goquery.NewScrapesAWSDocs(getter, maxWorkers),
 		WritesOutput:   json.NewWritesOutput(),
 	}
 	outFile, err := os.Create("out.json")

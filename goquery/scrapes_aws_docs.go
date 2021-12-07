@@ -9,19 +9,29 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/fwojciec/asr"
 	"golang.org/x/sync/errgroup"
+	"golang.org/x/sync/semaphore"
 )
 
 type scrapesAWSDocs struct {
 	getter          asr.Getter
+	maxWorkers      int64
 	cleanWhitespace *regexp.Regexp
 }
 
 func (sc *scrapesAWSDocs) Scrape(ctx context.Context, toc []*asr.TOCEntry) ([]*asr.Service, error) {
+	sem := semaphore.NewWeighted(sc.maxWorkers)
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
 	g, ctx := errgroup.WithContext(ctx)
 	res := make([]*asr.Service, len(toc))
 	for i, t := range toc {
 		i, t := i, t
+		err := sem.Acquire(ctx, 1)
+		if err != nil {
+			return nil, err
+		}
 		g.Go(func() error {
+			defer sem.Release(1)
 			body, err := sc.getter.Get(ctx, t.URL)
 			if err != nil {
 				return err
@@ -252,6 +262,6 @@ func (sc *scrapesAWSDocs) rowspan(s *goquery.Selection) (int, error) {
 	return 0, nil
 }
 
-func NewScrapesAWSDocs(getter asr.Getter) asr.ScrapesAWSDocs {
-	return &scrapesAWSDocs{getter: getter, cleanWhitespace: regexp.MustCompile(`\s+`)}
+func NewScrapesAWSDocs(getter asr.Getter, maxWorkers int64) asr.ScrapesAWSDocs {
+	return &scrapesAWSDocs{getter: getter, maxWorkers: maxWorkers, cleanWhitespace: regexp.MustCompile(`\s+`)}
 }
