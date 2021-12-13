@@ -26,7 +26,7 @@ func main() {
 		ScrapesAWSDocs: goquery.NewScrapesAWSDocs(getter, maxWorkers),
 		WritesOutput:   json.NewWritesOutput(),
 	}
-	outFile, err := os.Create("out.json")
+	outFile, err := os.Create("lambda/data.json")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)

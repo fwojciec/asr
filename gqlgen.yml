@@ -1,0 +1,11 @@
+schema: schema.graphql
+exec:
+  filename: gqlgen/exec.go
+model:
+  filename: gqlgen/model.go
+resolver:
+  filename: gqlgen/resolvers.go
+  type: Resolver
+
+autobind:
+  - github.com/fwojciec/asr/cache

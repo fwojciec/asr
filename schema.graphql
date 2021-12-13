@@ -1,0 +1,56 @@
+type Service {
+  id: ID!
+  prefix: String!
+  name: String!
+  configDocURL: String!
+  apiDocURL: String!
+  iamDocURL: String!
+  actions: [Action!]!
+  resourceTypes: [ResourceType!]!
+  conditionKeys: [ConditionKey!]!
+}
+
+type Action {
+  id: ID!
+  name: String!
+  docURL: String!
+  description: String!
+  accessLevel: String!
+  resourceTypes: [ActionResourceType!]!
+  conditionKeys: [ConditionKey!]!
+  dependentActions: [Action!]!
+  service: Service!
+}
+
+type ResourceType {
+  id: ID!
+  name: String!
+  docURL: String!
+  arnPattern: String!
+  conditionKeys: [ConditionKey!]!
+  actions: [Action!]!
+  service: Service!
+}
+
+type ConditionKey {
+  id: ID!
+  name: String!
+  docURL: String!
+  description: String!
+  type: String!
+  actions: [Action!]!
+  resourceTypes: [ResourceType!]!
+  services: [Service!]!
+}
+
+type ActionResourceType {
+  resourceType: ResourceType!
+  required: Boolean!
+}
+
+type Query {
+  services(filter: String): [Service!]!
+  actions(filter: String): [Action!]!
+  resourceTypes(filter: String): [ResourceType!]!
+  conditionKeys(filter: String): [ConditionKey!]!
+}
