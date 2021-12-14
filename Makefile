@@ -14,7 +14,7 @@ test: install
 	go test -race ./...
 
 handler: lambda/handler.go
-	go build -o $@ $^
+	go build -ldflags=-w -o $@ $^
 
 .PHONY: clean
 clean:
