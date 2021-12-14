@@ -12,7 +12,6 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/fwojciec/asr/cache"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -106,33 +105,33 @@ type ComplexityRoot struct {
 }
 
 type ActionResolver interface {
-	ConditionKeys(ctx context.Context, obj *cache.Action) ([]*cache.ConditionKey, error)
-	DependentActions(ctx context.Context, obj *cache.Action) ([]*cache.Action, error)
-	Service(ctx context.Context, obj *cache.Action) (*cache.Service, error)
+	ConditionKeys(ctx context.Context, obj *Action) ([]*ConditionKey, error)
+	DependentActions(ctx context.Context, obj *Action) ([]*Action, error)
+	Service(ctx context.Context, obj *Action) (*Service, error)
 }
 type ActionResourceTypeResolver interface {
-	ResourceType(ctx context.Context, obj *cache.ActionResourceType) (*cache.ResourceType, error)
+	ResourceType(ctx context.Context, obj *ActionResourceType) (*ResourceType, error)
 }
 type ConditionKeyResolver interface {
-	Actions(ctx context.Context, obj *cache.ConditionKey) ([]*cache.Action, error)
-	ResourceTypes(ctx context.Context, obj *cache.ConditionKey) ([]*cache.ResourceType, error)
-	Services(ctx context.Context, obj *cache.ConditionKey) ([]*cache.Service, error)
+	Actions(ctx context.Context, obj *ConditionKey) ([]*Action, error)
+	ResourceTypes(ctx context.Context, obj *ConditionKey) ([]*ResourceType, error)
+	Services(ctx context.Context, obj *ConditionKey) ([]*Service, error)
 }
 type QueryResolver interface {
-	Services(ctx context.Context, filter *string) ([]*cache.Service, error)
-	Actions(ctx context.Context, filter *string) ([]*cache.Action, error)
-	ResourceTypes(ctx context.Context, filter *string) ([]*cache.ResourceType, error)
-	ConditionKeys(ctx context.Context, filter *string) ([]*cache.ConditionKey, error)
+	Services(ctx context.Context, filter *string) ([]*Service, error)
+	Actions(ctx context.Context, filter *string) ([]*Action, error)
+	ResourceTypes(ctx context.Context, filter *string) ([]*ResourceType, error)
+	ConditionKeys(ctx context.Context, filter *string) ([]*ConditionKey, error)
 }
 type ResourceTypeResolver interface {
-	ConditionKeys(ctx context.Context, obj *cache.ResourceType) ([]*cache.ConditionKey, error)
-	Actions(ctx context.Context, obj *cache.ResourceType) ([]*cache.Action, error)
-	Service(ctx context.Context, obj *cache.ResourceType) (*cache.Service, error)
+	ConditionKeys(ctx context.Context, obj *ResourceType) ([]*ConditionKey, error)
+	Actions(ctx context.Context, obj *ResourceType) ([]*Action, error)
+	Service(ctx context.Context, obj *ResourceType) (*Service, error)
 }
 type ServiceResolver interface {
-	Actions(ctx context.Context, obj *cache.Service) ([]*cache.Action, error)
-	ResourceTypes(ctx context.Context, obj *cache.Service) ([]*cache.ResourceType, error)
-	ConditionKeys(ctx context.Context, obj *cache.Service) ([]*cache.ConditionKey, error)
+	Actions(ctx context.Context, obj *Service) ([]*Action, error)
+	ResourceTypes(ctx context.Context, obj *Service) ([]*ResourceType, error)
+	ConditionKeys(ctx context.Context, obj *Service) ([]*ConditionKey, error)
 }
 
 type executableSchema struct {
@@ -670,7 +669,7 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Action_id(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_id(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -705,7 +704,7 @@ func (ec *executionContext) _Action_id(ctx context.Context, field graphql.Collec
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_name(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_name(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -740,7 +739,7 @@ func (ec *executionContext) _Action_name(ctx context.Context, field graphql.Coll
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_docURL(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_docURL(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -775,7 +774,7 @@ func (ec *executionContext) _Action_docURL(ctx context.Context, field graphql.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_description(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_description(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -810,7 +809,7 @@ func (ec *executionContext) _Action_description(ctx context.Context, field graph
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_accessLevel(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_accessLevel(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -845,7 +844,7 @@ func (ec *executionContext) _Action_accessLevel(ctx context.Context, field graph
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -875,12 +874,12 @@ func (ec *executionContext) _Action_resourceTypes(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]cache.ActionResourceType)
+	res := resTmp.([]ActionResourceType)
 	fc.Result = res
-	return ec.marshalNActionResourceType2ᚕgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionResourceTypeᚄ(ctx, field.Selections, res)
+	return ec.marshalNActionResourceType2ᚕgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionResourceTypeᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -910,12 +909,12 @@ func (ec *executionContext) _Action_conditionKeys(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ConditionKey)
+	res := resTmp.([]*ConditionKey)
 	fc.Result = res
-	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKeyᚄ(ctx, field.Selections, res)
+	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKeyᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_dependentActions(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_dependentActions(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -945,12 +944,12 @@ func (ec *executionContext) _Action_dependentActions(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Action)
+	res := resTmp.([]*Action)
 	fc.Result = res
-	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx, field.Selections, res)
+	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Action_service(ctx context.Context, field graphql.CollectedField, obj *cache.Action) (ret graphql.Marshaler) {
+func (ec *executionContext) _Action_service(ctx context.Context, field graphql.CollectedField, obj *Action) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -980,12 +979,12 @@ func (ec *executionContext) _Action_service(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*cache.Service)
+	res := resTmp.(*Service)
 	fc.Result = res
-	return ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐService(ctx, field.Selections, res)
+	return ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐService(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ActionResourceType_resourceType(ctx context.Context, field graphql.CollectedField, obj *cache.ActionResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ActionResourceType_resourceType(ctx context.Context, field graphql.CollectedField, obj *ActionResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1015,12 +1014,12 @@ func (ec *executionContext) _ActionResourceType_resourceType(ctx context.Context
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*cache.ResourceType)
+	res := resTmp.(*ResourceType)
 	fc.Result = res
-	return ec.marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceType(ctx, field.Selections, res)
+	return ec.marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceType(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ActionResourceType_required(ctx context.Context, field graphql.CollectedField, obj *cache.ActionResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ActionResourceType_required(ctx context.Context, field graphql.CollectedField, obj *ActionResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1055,7 +1054,7 @@ func (ec *executionContext) _ActionResourceType_required(ctx context.Context, fi
 	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_id(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_id(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1090,7 +1089,7 @@ func (ec *executionContext) _ConditionKey_id(ctx context.Context, field graphql.
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_name(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_name(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1125,7 +1124,7 @@ func (ec *executionContext) _ConditionKey_name(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_docURL(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_docURL(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1160,7 +1159,7 @@ func (ec *executionContext) _ConditionKey_docURL(ctx context.Context, field grap
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_description(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_description(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1195,7 +1194,7 @@ func (ec *executionContext) _ConditionKey_description(ctx context.Context, field
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_type(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_type(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1230,7 +1229,7 @@ func (ec *executionContext) _ConditionKey_type(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_actions(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_actions(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1260,12 +1259,12 @@ func (ec *executionContext) _ConditionKey_actions(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Action)
+	res := resTmp.([]*Action)
 	fc.Result = res
-	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx, field.Selections, res)
+	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1295,12 +1294,12 @@ func (ec *executionContext) _ConditionKey_resourceTypes(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ResourceType)
+	res := resTmp.([]*ResourceType)
 	fc.Result = res
-	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceTypeᚄ(ctx, field.Selections, res)
+	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceTypeᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ConditionKey_services(ctx context.Context, field graphql.CollectedField, obj *cache.ConditionKey) (ret graphql.Marshaler) {
+func (ec *executionContext) _ConditionKey_services(ctx context.Context, field graphql.CollectedField, obj *ConditionKey) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1330,9 +1329,9 @@ func (ec *executionContext) _ConditionKey_services(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Service)
+	res := resTmp.([]*Service)
 	fc.Result = res
-	return ec.marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐServiceᚄ(ctx, field.Selections, res)
+	return ec.marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐServiceᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_services(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1372,9 +1371,9 @@ func (ec *executionContext) _Query_services(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Service)
+	res := resTmp.([]*Service)
 	fc.Result = res
-	return ec.marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐServiceᚄ(ctx, field.Selections, res)
+	return ec.marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐServiceᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_actions(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1414,9 +1413,9 @@ func (ec *executionContext) _Query_actions(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Action)
+	res := resTmp.([]*Action)
 	fc.Result = res
-	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx, field.Selections, res)
+	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_resourceTypes(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1456,9 +1455,9 @@ func (ec *executionContext) _Query_resourceTypes(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ResourceType)
+	res := resTmp.([]*ResourceType)
 	fc.Result = res
-	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceTypeᚄ(ctx, field.Selections, res)
+	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceTypeᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_conditionKeys(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1498,9 +1497,9 @@ func (ec *executionContext) _Query_conditionKeys(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ConditionKey)
+	res := resTmp.([]*ConditionKey)
 	fc.Result = res
-	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKeyᚄ(ctx, field.Selections, res)
+	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKeyᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -1574,7 +1573,7 @@ func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.C
 	return ec.marshalO__Schema2ᚖgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_id(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_id(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1609,7 +1608,7 @@ func (ec *executionContext) _ResourceType_id(ctx context.Context, field graphql.
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_name(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_name(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1644,7 +1643,7 @@ func (ec *executionContext) _ResourceType_name(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_docURL(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_docURL(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1679,7 +1678,7 @@ func (ec *executionContext) _ResourceType_docURL(ctx context.Context, field grap
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_arnPattern(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_arnPattern(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1714,7 +1713,7 @@ func (ec *executionContext) _ResourceType_arnPattern(ctx context.Context, field 
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1744,12 +1743,12 @@ func (ec *executionContext) _ResourceType_conditionKeys(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ConditionKey)
+	res := resTmp.([]*ConditionKey)
 	fc.Result = res
-	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKeyᚄ(ctx, field.Selections, res)
+	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKeyᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_actions(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_actions(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1779,12 +1778,12 @@ func (ec *executionContext) _ResourceType_actions(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Action)
+	res := resTmp.([]*Action)
 	fc.Result = res
-	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx, field.Selections, res)
+	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _ResourceType_service(ctx context.Context, field graphql.CollectedField, obj *cache.ResourceType) (ret graphql.Marshaler) {
+func (ec *executionContext) _ResourceType_service(ctx context.Context, field graphql.CollectedField, obj *ResourceType) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1814,12 +1813,12 @@ func (ec *executionContext) _ResourceType_service(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*cache.Service)
+	res := resTmp.(*Service)
 	fc.Result = res
-	return ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐService(ctx, field.Selections, res)
+	return ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐService(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_id(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_id(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1854,7 +1853,7 @@ func (ec *executionContext) _Service_id(ctx context.Context, field graphql.Colle
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_prefix(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_prefix(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1889,7 +1888,7 @@ func (ec *executionContext) _Service_prefix(ctx context.Context, field graphql.C
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_name(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_name(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1924,7 +1923,7 @@ func (ec *executionContext) _Service_name(ctx context.Context, field graphql.Col
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_configDocURL(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_configDocURL(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1959,7 +1958,7 @@ func (ec *executionContext) _Service_configDocURL(ctx context.Context, field gra
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_apiDocURL(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_apiDocURL(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -1994,7 +1993,7 @@ func (ec *executionContext) _Service_apiDocURL(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_iamDocURL(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_iamDocURL(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -2029,7 +2028,7 @@ func (ec *executionContext) _Service_iamDocURL(ctx context.Context, field graphq
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_actions(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_actions(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -2059,12 +2058,12 @@ func (ec *executionContext) _Service_actions(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.Action)
+	res := resTmp.([]*Action)
 	fc.Result = res
-	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx, field.Selections, res)
+	return ec.marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_resourceTypes(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -2094,12 +2093,12 @@ func (ec *executionContext) _Service_resourceTypes(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ResourceType)
+	res := resTmp.([]*ResourceType)
 	fc.Result = res
-	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceTypeᚄ(ctx, field.Selections, res)
+	return ec.marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceTypeᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Service_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *cache.Service) (ret graphql.Marshaler) {
+func (ec *executionContext) _Service_conditionKeys(ctx context.Context, field graphql.CollectedField, obj *Service) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -2129,9 +2128,9 @@ func (ec *executionContext) _Service_conditionKeys(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*cache.ConditionKey)
+	res := resTmp.([]*ConditionKey)
 	fc.Result = res
-	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKeyᚄ(ctx, field.Selections, res)
+	return ec.marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKeyᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Directive_name(ctx context.Context, field graphql.CollectedField, obj *introspection.Directive) (ret graphql.Marshaler) {
@@ -3266,7 +3265,7 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 
 var actionImplementors = []string{"Action"}
 
-func (ec *executionContext) _Action(ctx context.Context, sel ast.SelectionSet, obj *cache.Action) graphql.Marshaler {
+func (ec *executionContext) _Action(ctx context.Context, sel ast.SelectionSet, obj *Action) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, actionImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3360,7 +3359,7 @@ func (ec *executionContext) _Action(ctx context.Context, sel ast.SelectionSet, o
 
 var actionResourceTypeImplementors = []string{"ActionResourceType"}
 
-func (ec *executionContext) _ActionResourceType(ctx context.Context, sel ast.SelectionSet, obj *cache.ActionResourceType) graphql.Marshaler {
+func (ec *executionContext) _ActionResourceType(ctx context.Context, sel ast.SelectionSet, obj *ActionResourceType) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, actionResourceTypeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3401,7 +3400,7 @@ func (ec *executionContext) _ActionResourceType(ctx context.Context, sel ast.Sel
 
 var conditionKeyImplementors = []string{"ConditionKey"}
 
-func (ec *executionContext) _ConditionKey(ctx context.Context, sel ast.SelectionSet, obj *cache.ConditionKey) graphql.Marshaler {
+func (ec *executionContext) _ConditionKey(ctx context.Context, sel ast.SelectionSet, obj *ConditionKey) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, conditionKeyImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3576,7 +3575,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var resourceTypeImplementors = []string{"ResourceType"}
 
-func (ec *executionContext) _ResourceType(ctx context.Context, sel ast.SelectionSet, obj *cache.ResourceType) graphql.Marshaler {
+func (ec *executionContext) _ResourceType(ctx context.Context, sel ast.SelectionSet, obj *ResourceType) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, resourceTypeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -3660,7 +3659,7 @@ func (ec *executionContext) _ResourceType(ctx context.Context, sel ast.Selection
 
 var serviceImplementors = []string{"Service"}
 
-func (ec *executionContext) _Service(ctx context.Context, sel ast.SelectionSet, obj *cache.Service) graphql.Marshaler {
+func (ec *executionContext) _Service(ctx context.Context, sel ast.SelectionSet, obj *Service) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, serviceImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -4002,7 +4001,7 @@ func (ec *executionContext) ___Type(ctx context.Context, sel ast.SelectionSet, o
 
 // region    ***************************** type.gotpl *****************************
 
-func (ec *executionContext) marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionᚄ(ctx context.Context, sel ast.SelectionSet, v []*cache.Action) graphql.Marshaler {
+func (ec *executionContext) marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionᚄ(ctx context.Context, sel ast.SelectionSet, v []*Action) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -4026,7 +4025,7 @@ func (ec *executionContext) marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasr�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNAction2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐAction(ctx, sel, v[i])
+			ret[i] = ec.marshalNAction2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐAction(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -4046,7 +4045,7 @@ func (ec *executionContext) marshalNAction2ᚕᚖgithubᚗcomᚋfwojciecᚋasr�
 	return ret
 }
 
-func (ec *executionContext) marshalNAction2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐAction(ctx context.Context, sel ast.SelectionSet, v *cache.Action) graphql.Marshaler {
+func (ec *executionContext) marshalNAction2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐAction(ctx context.Context, sel ast.SelectionSet, v *Action) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -4056,11 +4055,11 @@ func (ec *executionContext) marshalNAction2ᚖgithubᚗcomᚋfwojciecᚋasrᚋca
 	return ec._Action(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNActionResourceType2githubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionResourceType(ctx context.Context, sel ast.SelectionSet, v cache.ActionResourceType) graphql.Marshaler {
+func (ec *executionContext) marshalNActionResourceType2githubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionResourceType(ctx context.Context, sel ast.SelectionSet, v ActionResourceType) graphql.Marshaler {
 	return ec._ActionResourceType(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNActionResourceType2ᚕgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionResourceTypeᚄ(ctx context.Context, sel ast.SelectionSet, v []cache.ActionResourceType) graphql.Marshaler {
+func (ec *executionContext) marshalNActionResourceType2ᚕgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionResourceTypeᚄ(ctx context.Context, sel ast.SelectionSet, v []ActionResourceType) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -4084,7 +4083,7 @@ func (ec *executionContext) marshalNActionResourceType2ᚕgithubᚗcomᚋfwojcie
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNActionResourceType2githubᚗcomᚋfwojciecᚋasrᚋcacheᚐActionResourceType(ctx, sel, v[i])
+			ret[i] = ec.marshalNActionResourceType2githubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐActionResourceType(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -4119,7 +4118,7 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKeyᚄ(ctx context.Context, sel ast.SelectionSet, v []*cache.ConditionKey) graphql.Marshaler {
+func (ec *executionContext) marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKeyᚄ(ctx context.Context, sel ast.SelectionSet, v []*ConditionKey) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -4143,7 +4142,7 @@ func (ec *executionContext) marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciec�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNConditionKey2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKey(ctx, sel, v[i])
+			ret[i] = ec.marshalNConditionKey2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKey(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -4163,7 +4162,7 @@ func (ec *executionContext) marshalNConditionKey2ᚕᚖgithubᚗcomᚋfwojciec�
 	return ret
 }
 
-func (ec *executionContext) marshalNConditionKey2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐConditionKey(ctx context.Context, sel ast.SelectionSet, v *cache.ConditionKey) graphql.Marshaler {
+func (ec *executionContext) marshalNConditionKey2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐConditionKey(ctx context.Context, sel ast.SelectionSet, v *ConditionKey) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -4188,11 +4187,11 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
-func (ec *executionContext) marshalNResourceType2githubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceType(ctx context.Context, sel ast.SelectionSet, v cache.ResourceType) graphql.Marshaler {
+func (ec *executionContext) marshalNResourceType2githubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceType(ctx context.Context, sel ast.SelectionSet, v ResourceType) graphql.Marshaler {
 	return ec._ResourceType(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceTypeᚄ(ctx context.Context, sel ast.SelectionSet, v []*cache.ResourceType) graphql.Marshaler {
+func (ec *executionContext) marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceTypeᚄ(ctx context.Context, sel ast.SelectionSet, v []*ResourceType) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -4216,7 +4215,7 @@ func (ec *executionContext) marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciec�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceType(ctx, sel, v[i])
+			ret[i] = ec.marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceType(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -4236,7 +4235,7 @@ func (ec *executionContext) marshalNResourceType2ᚕᚖgithubᚗcomᚋfwojciec�
 	return ret
 }
 
-func (ec *executionContext) marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐResourceType(ctx context.Context, sel ast.SelectionSet, v *cache.ResourceType) graphql.Marshaler {
+func (ec *executionContext) marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐResourceType(ctx context.Context, sel ast.SelectionSet, v *ResourceType) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -4246,11 +4245,11 @@ func (ec *executionContext) marshalNResourceType2ᚖgithubᚗcomᚋfwojciecᚋas
 	return ec._ResourceType(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNService2githubᚗcomᚋfwojciecᚋasrᚋcacheᚐService(ctx context.Context, sel ast.SelectionSet, v cache.Service) graphql.Marshaler {
+func (ec *executionContext) marshalNService2githubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐService(ctx context.Context, sel ast.SelectionSet, v Service) graphql.Marshaler {
 	return ec._Service(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐServiceᚄ(ctx context.Context, sel ast.SelectionSet, v []*cache.Service) graphql.Marshaler {
+func (ec *executionContext) marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐServiceᚄ(ctx context.Context, sel ast.SelectionSet, v []*Service) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -4274,7 +4273,7 @@ func (ec *executionContext) marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasr�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐService(ctx, sel, v[i])
+			ret[i] = ec.marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐService(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -4294,7 +4293,7 @@ func (ec *executionContext) marshalNService2ᚕᚖgithubᚗcomᚋfwojciecᚋasr�
 	return ret
 }
 
-func (ec *executionContext) marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋcacheᚐService(ctx context.Context, sel ast.SelectionSet, v *cache.Service) graphql.Marshaler {
+func (ec *executionContext) marshalNService2ᚖgithubᚗcomᚋfwojciecᚋasrᚋgqlgenᚐService(ctx context.Context, sel ast.SelectionSet, v *Service) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")

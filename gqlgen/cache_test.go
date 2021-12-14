@@ -1,4 +1,4 @@
-package cache_test
+package gqlgen_test
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/fwojciec/asr"
-	"github.com/fwojciec/asr/cache"
+	"github.com/fwojciec/asr/gqlgen"
 )
 
 func TestAddService(t *testing.T) {
@@ -17,7 +17,7 @@ func TestAddService(t *testing.T) {
 	for _, tc := range []struct {
 		name string
 		data []*asr.Service
-		exp  *cache.Cache
+		exp  *gqlgen.Cache
 	}{
 		{
 			name: "basic service",
@@ -28,8 +28,8 @@ func TestAddService(t *testing.T) {
 				APIDocURL:    "test_api_doc_url",
 				IAMDocURL:    "test_iam_doc_url",
 			}},
-			exp: &cache.Cache{
-				ServiceByID: map[string]*cache.Service{"test_prefix": {
+			exp: &gqlgen.Cache{
+				ServiceByID: map[string]*gqlgen.Service{"test_prefix": {
 					ID:           "test_prefix",
 					Name:         "test_name",
 					Prefix:       "test_prefix",
@@ -57,20 +57,20 @@ func TestAddService(t *testing.T) {
 					DependentActions: []string{"test_dependent_action"},
 				}},
 			}},
-			exp: &cache.Cache{
-				ServiceByID: map[string]*cache.Service{"test_prefix": {
+			exp: &gqlgen.Cache{
+				ServiceByID: map[string]*gqlgen.Service{"test_prefix": {
 					ID:      "test_prefix",
 					Prefix:  "test_prefix",
 					Actions: []string{"test_prefix:test_action_name"},
 				}},
-				ActionByID: map[string]*cache.Action{"test_prefix:test_action_name": {
+				ActionByID: map[string]*gqlgen.Action{"test_prefix:test_action_name": {
 					ID:            "test_prefix:test_action_name",
 					Name:          "test_action_name",
 					DocURL:        "test_doc_url",
 					Description:   "test_description",
 					AccessLevel:   "test_access_level",
 					ConditionKeys: []string{"test_condition_key"},
-					ResourceTypes: []cache.ActionResourceType{{
+					ResourceTypes: []gqlgen.ActionResourceType{{
 						ResourceType: "test_prefix:test_resource_type",
 						Required:     true,
 					}},
@@ -88,7 +88,7 @@ func TestAddService(t *testing.T) {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
-			res := cache.NewCache(tc.data)
+			res := gqlgen.NewCache(tc.data)
 			equals(t, tc.exp, res)
 		})
 	}

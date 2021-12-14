@@ -8,4 +8,4 @@ resolver:
   type: Resolver
 
 autobind:
-  - github.com/fwojciec/asr/cache
+  - github.com/fwojciec/asr/gqlgen
