@@ -18,14 +18,18 @@ handler: lambda/handler.go
 
 .PHONY: clean
 clean:
-	rm -f handler $(PACKAGED_TEMPLATE)
+	rm -f handler handler.zip $(PACKAGED_TEMPLATE) || true
 
 .PHONY: lambda
 lambda:
 	GOOS=linux GOARCH=amd64 $(MAKE) handler
 
+.PHONY: package
+package: lambda
+	zip handler.zip handler
+
 .PHONY: build
-build: clean lambda
+build: clean lambda package
 
 .PHONY: deploy
 deploy: build

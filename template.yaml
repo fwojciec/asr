@@ -16,6 +16,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler
+      CodeUri: handler.zip
       Runtime: go1.x
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 10
